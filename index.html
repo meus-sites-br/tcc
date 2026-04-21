@@ -13,7 +13,7 @@
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
-                        primary: '#0ea5e9', // Sky 500 (Turismo/Criatividade)
+                        primary: '#0ea5e9', // Sky 500
                         secondary: '#f59e0b', // Amber 500
                         dark: '#0f172a',
                         light: '#f8fafc'
@@ -32,14 +32,12 @@
         .toast-enter { animation: slideIn 0.3s ease-out forwards; }
         .toast-exit { animation: fadeOut 0.3s ease-out forwards; }
 
-        /* Loader */
         .loader { border: 3px solid #f3f3f3; border-top: 3px solid #0ea5e9; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="flex h-screen overflow-hidden text-slate-800">
 
-    <!-- Toast Notification Container -->
     <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-2"></div>
 
     <!-- Sidebar -->
@@ -80,21 +78,18 @@
 
     <!-- Main Content -->
     <main class="flex-1 h-full overflow-y-auto bg-slate-50 p-4 md:p-8 relative">
-        
-        <!-- HEADER -->
         <header class="flex justify-between items-center mb-8 bg-white p-4 rounded-xl shadow-sm border border-slate-200">
             <div>
                 <h1 id="page-title" class="text-2xl font-bold text-slate-800">Visão Geral</h1>
                 <p class="text-sm text-slate-500">Proposta de Turismo Criativo - Jaboatão dos Guararapes</p>
             </div>
             <div class="flex items-center gap-6">
-                <!-- Seletor de Perfil (Local) -->
                 <div class="flex items-center gap-2 bg-slate-100 p-2 rounded-lg border border-slate-200">
                     <i class="fas fa-user-circle text-slate-400"></i>
                     <select id="user-profile" onchange="changeProfile()" class="bg-transparent text-sm font-medium outline-none text-slate-700 cursor-pointer">
-                        <option value="Aluna 1">Allan</option>
-                        <option value="Aluna 2">Haysha</option>
-                        <option value="Orientadora">Orientadora Sônia</option>
+                        <option value="Allan">Allan (Aluno)</option>
+                        <option value="Haysha">Haysha (Aluna)</option>
+                        <option value="Sônia">Profª. Sônia (Orientadora)</option>
                     </select>
                 </div>
 
@@ -110,36 +105,27 @@
         <!-- VIEWS -->
         <div id="view-dashboard" class="view-section block">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Progressões -->
                 <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-200 p-6">
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-lg font-bold"><i class="fas fa-list-ol mr-2 text-primary"></i>Estrutura do TCC</h2>
-                        <span class="text-xs text-slate-400 bg-slate-100 px-2 py-1 rounded">Sincronizado na Nuvem</span>
                     </div>
-                    <div id="chapters-container" class="space-y-5">
-                        <!-- Renderizado via JS -->
-                    </div>
+                    <div id="chapters-container" class="space-y-5"></div>
                 </div>
 
-                <!-- Próximos Passos -->
                 <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col">
                     <h2 class="text-lg font-bold mb-6"><i class="fas fa-bolt mr-2 text-secondary"></i>Foco Atual</h2>
-                    <div id="focus-tasks" class="flex-1 space-y-3">
-                        <!-- Renderizado via JS -->
-                    </div>
+                    <div id="focus-tasks" class="flex-1 space-y-3"></div>
                     <button onclick="switchTab('kanban')" class="mt-4 w-full py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-semibold hover:bg-slate-200 transition">Ir para o Kanban</button>
                 </div>
             </div>
         </div>
 
-        <!-- Kanban View -->
         <div id="view-kanban" class="view-section hidden h-full flex-col">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-lg font-bold">Quadro de Tarefas Colaborativo</h2>
                 <button onclick="openModal('task-modal')" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-sky-600 transition shadow-sm"><i class="fas fa-plus mr-2"></i>Nova Tarefa</button>
             </div>
             <div class="flex gap-4 overflow-x-auto pb-4 flex-1 items-start scrollbar-hide">
-                <!-- Coluna A Fazer -->
                 <div class="min-w-[280px] w-[280px] bg-slate-200/50 rounded-xl p-3 border border-slate-200">
                     <div class="flex justify-between items-center mb-3 px-1">
                         <h3 class="font-semibold text-slate-700 text-sm">A Fazer</h3>
@@ -147,7 +133,6 @@
                     </div>
                     <div id="col-todo" class="space-y-3 min-h-[100px]"></div>
                 </div>
-                <!-- Coluna Em Andamento -->
                 <div class="min-w-[280px] w-[280px] bg-sky-50 rounded-xl p-3 border border-sky-100">
                     <div class="flex justify-between items-center mb-3 px-1">
                         <h3 class="font-semibold text-sky-700 text-sm">Em Andamento</h3>
@@ -155,7 +140,6 @@
                     </div>
                     <div id="col-doing" class="space-y-3 min-h-[100px]"></div>
                 </div>
-                <!-- Coluna Revisão -->
                 <div class="min-w-[280px] w-[280px] bg-amber-50 rounded-xl p-3 border border-amber-100">
                     <div class="flex justify-between items-center mb-3 px-1">
                         <h3 class="font-semibold text-amber-700 text-sm">Revisão (Orientadora)</h3>
@@ -163,7 +147,6 @@
                     </div>
                     <div id="col-review" class="space-y-3 min-h-[100px]"></div>
                 </div>
-                <!-- Coluna Concluído -->
                 <div class="min-w-[280px] w-[280px] bg-emerald-50 rounded-xl p-3 border border-emerald-100">
                     <div class="flex justify-between items-center mb-3 px-1">
                         <h3 class="font-semibold text-emerald-700 text-sm">Concluído</h3>
@@ -174,36 +157,27 @@
             </div>
         </div>
 
-        <!-- References View -->
         <div id="view-referencias" class="view-section hidden">
             <div class="flex flex-col sm:flex-row justify-between mb-6 gap-4">
                 <h2 class="text-lg font-bold">Repositório Bibliográfico</h2>
                 <button onclick="openModal('ref-modal')" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-sky-600 transition shadow-sm"><i class="fas fa-plus mr-2"></i>Nova Referência</button>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="references-container">
-                <!-- Renderizado via JS -->
-            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="references-container"></div>
         </div>
 
-        <!-- Notes View -->
         <div id="view-anotacoes" class="view-section hidden">
             <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6 relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-32 h-32 bg-primary opacity-5 rounded-full -mr-10 -mt-10"></div>
-                <h2 class="text-lg font-bold mb-2">Captura de Insights (Turismo & Cultura)</h2>
-                <p class="text-sm text-slate-500 mb-4">Teve uma ideia para a intervenção criativa no Monte? Anote para o grupo ver.</p>
-                <textarea id="new-note-text" class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition relative z-10" rows="3" placeholder="Ex: Contatar os artesãos da associação local para entrevistas..."></textarea>
+                <h2 class="text-lg font-bold mb-2">Captura de Insights</h2>
+                <textarea id="new-note-text" class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition relative z-10" rows="3" placeholder="Ex: Contatar os artesãos da associação local..."></textarea>
                 <div class="text-right mt-2">
                     <button onclick="addNote()" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-sky-600 transition shadow-sm relative z-10">Salvar Insight</button>
                 </div>
             </div>
-            <div class="space-y-4" id="notes-container">
-                <!-- Renderizado via JS -->
-            </div>
+            <div class="space-y-4" id="notes-container"></div>
         </div>
 
-        <!-- Área da Orientadora View -->
         <div id="view-orientacao" class="view-section hidden">
-            
             <div class="bg-white rounded-xl shadow-sm border border-secondary p-6 border-t-4 border-t-secondary mb-6">
                 <div class="flex items-center gap-4 mb-4">
                     <div class="w-12 h-12 bg-amber-100 text-secondary rounded-full flex items-center justify-center text-xl">
@@ -211,56 +185,36 @@
                     </div>
                     <div>
                         <h2 class="text-xl font-bold text-slate-800">Painel Central de Orientação</h2>
-                        <p class="text-sm text-slate-500">Gestão do documento principal e apontamentos</p>
                     </div>
                 </div>
-
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                    
-                    <!-- Bloco: Documento do Google Docs -->
                     <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 flex flex-col">
-                        <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fab fa-google-drive text-blue-500"></i> Documento Oficial (TCC)</h3>
-                        <p class="text-sm text-slate-600 mb-4 flex-1">Configure o link do Google Docs com permissão de comentário. A orientadora usará este link para ler e grifar o texto diretamente na fonte.</p>
-                        
-                        <div class="flex gap-2 mb-4">
+                        <h3 class="font-bold text-slate-800 mb-2"><i class="fab fa-google-drive text-blue-500"></i> Documento Oficial (TCC)</h3>
+                        <div class="flex gap-2 mb-4 mt-auto">
                             <input type="text" id="docs-link-input" class="w-full border border-slate-300 rounded-lg p-2 text-sm outline-none focus:border-primary" placeholder="Cole o link do Google Docs aqui">
                             <button onclick="saveDocsLink()" class="bg-slate-800 text-white px-4 rounded-lg text-sm hover:bg-slate-700 transition">Salvar</button>
                         </div>
-                        
                         <a href="#" id="open-docs-btn" target="_blank" class="w-full text-center bg-blue-600 text-white px-4 py-3 rounded-lg font-semibold hover:bg-blue-700 transition shadow-sm opacity-50 pointer-events-none">
-                            Abrir Documento para Correção <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                            Abrir Documento <i class="fas fa-external-link-alt ml-2 text-sm"></i>
                         </a>
                     </div>
-
-                    <!-- Bloco: Adicionar Feedback Direto -->
                     <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 flex flex-col">
-                        <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fas fa-comment-dots text-secondary"></i> Enviar Tarefa/Feedback</h3>
-                        <p class="text-sm text-slate-600 mb-4">Crie uma diretriz nova. Ela será enviada automaticamente para o quadro "A Fazer" das alunas.</p>
-                        
-                        <textarea id="advisor-task-input" class="w-full border border-slate-300 rounded-lg p-3 text-sm outline-none focus:ring-2 focus:ring-secondary mb-3 flex-1" placeholder="Ex: Refazer a fundamentação teórica da página 12 e adicionar autores sobre economia criativa."></textarea>
-                        
+                        <h3 class="font-bold text-slate-800 mb-2"><i class="fas fa-comment-dots text-secondary"></i> Enviar Tarefa/Feedback</h3>
+                        <textarea id="advisor-task-input" class="w-full border border-slate-300 rounded-lg p-3 text-sm outline-none focus:ring-2 focus:ring-secondary mb-3 flex-1" placeholder="Ex: Refazer a fundamentação teórica e citar autores novos..."></textarea>
                         <button onclick="addAdvisorTask()" class="w-full bg-secondary text-white px-4 py-3 rounded-lg font-semibold hover:bg-amber-600 transition shadow-sm">
-                            Enviar para o Kanban das Alunas
+                            Enviar para o Kanban
                         </button>
                     </div>
-
                 </div>
             </div>
-
             <div class="px-2">
-                <h3 class="font-bold text-slate-700 mb-4"><i class="fas fa-history mr-2"></i>Histórico de Tarefas da Orientadora</h3>
-                <div id="advisor-history" class="space-y-3">
-                    <!-- JS Render -->
-                </div>
+                <h3 class="font-bold text-slate-700 mb-4"><i class="fas fa-history mr-2"></i>Histórico da Orientadora (Sônia)</h3>
+                <div id="advisor-history" class="space-y-3"></div>
             </div>
-
         </div>
-
     </main>
 
-    <!-- MODAIS -->
-    
-    <!-- Modal Tarefa -->
+    <!-- Modais -->
     <div id="task-modal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center backdrop-blur-sm transition-opacity">
         <div class="bg-white rounded-xl shadow-2xl w-full max-w-md p-6 transform scale-95 transition-transform" id="task-modal-content">
             <div class="flex justify-between items-center mb-4">
@@ -269,26 +223,25 @@
             </div>
             <div class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Descrição da Tarefa</label>
-                    <input type="text" id="task-title" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-primary outline-none" placeholder="Ex: Entrevistar gestor do Parque Histórico">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Descrição</label>
+                    <input type="text" id="task-title" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-primary outline-none" placeholder="Ex: Entrevistar gestor">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Link Relacionado (Opcional)</label>
-                    <input type="text" id="task-link" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-primary outline-none text-sm" placeholder="Ex: Link de um PDF ou Google Docs">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Link (Opcional)</label>
+                    <input type="text" id="task-link" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-primary outline-none text-sm" placeholder="Link de documento ou referência">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Status Inicial</label>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Status</label>
                     <select id="task-status" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-primary outline-none">
                         <option value="todo">A Fazer</option>
                         <option value="doing">Em Andamento</option>
                     </select>
                 </div>
-                <button onclick="saveTask()" class="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-sky-600 transition">Salvar na Nuvem</button>
+                <button onclick="saveTask()" class="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-sky-600 transition">Salvar Tarefa</button>
             </div>
         </div>
     </div>
 
-    <!-- Modal Referência -->
     <div id="ref-modal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center backdrop-blur-sm transition-opacity">
         <div class="bg-white rounded-xl shadow-2xl w-full max-w-md p-6 transform scale-95 transition-transform" id="ref-modal-content">
             <div class="flex justify-between items-center mb-4">
@@ -296,45 +249,50 @@
                 <button onclick="closeModal('ref-modal')" class="text-slate-400 hover:text-slate-600"><i class="fas fa-times"></i></button>
             </div>
             <div class="space-y-3">
-                <div>
-                    <label class="block text-xs font-medium text-slate-700 mb-1">Autor(es) (Ex: RICHARDS, G.)</label>
-                    <input type="text" id="ref-author" class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-primary outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-medium text-slate-700 mb-1">Título da Obra</label>
-                    <input type="text" id="ref-title" class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-primary outline-none">
-                </div>
+                <input type="text" id="ref-author" class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-primary outline-none" placeholder="Autor">
+                <input type="text" id="ref-title" class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-primary outline-none" placeholder="Título">
                 <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-medium text-slate-700 mb-1">Ano</label>
-                        <input type="text" id="ref-year" class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-primary outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-700 mb-1">Tipo</label>
-                        <select id="ref-type" class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-primary outline-none">
-                            <option value="Artigo">Artigo</option>
-                            <option value="Livro">Livro</option>
-                            <option value="Documento Oficial">Documento Oficial</option>
-                            <option value="Site">Site</option>
-                        </select>
-                    </div>
+                    <input type="text" id="ref-year" class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-primary outline-none" placeholder="Ano">
+                    <select id="ref-type" class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-primary outline-none">
+                        <option value="Artigo">Artigo</option>
+                        <option value="Livro">Livro</option>
+                        <option value="Site">Site</option>
+                    </select>
                 </div>
-                <div>
-                    <label class="block text-xs font-medium text-slate-700 mb-1">Link/URL (Opcional)</label>
-                    <input type="text" id="ref-url" class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-primary outline-none">
-                </div>
+                <input type="text" id="ref-url" class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-primary outline-none" placeholder="URL">
                 <button onclick="saveReference()" class="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-sky-600 transition mt-2">Salvar Referência</button>
             </div>
         </div>
     </div>
 
-    <!-- FIREBASE & APPLICATION LOGIC -->
+    <!-- Script de Failsafe Anti-Travamento -->
+    <script>
+        window.firebaseLoaded = false;
+        
+        // Se o Firebase não responder em 4 segundos, ele força a abertura do painel localmente
+        setTimeout(() => {
+            if (!window.firebaseLoaded) {
+                console.warn("Firebase bloqueado ou demorando muito. Iniciando Modo Local de segurança.");
+                document.getElementById('sync-status').innerHTML = '<i class="fas fa-laptop text-slate-500"></i> Modo Local (Offline)';
+                
+                // Carrega os dados offline caso existam
+                const localData = localStorage.getItem('tccCloudData');
+                if(localData && typeof window.appData !== 'undefined') {
+                    window.appData = JSON.parse(localData);
+                }
+                if(typeof window.updateAllViews === 'function') {
+                    window.updateAllViews();
+                }
+            }
+        }, 4000);
+    </script>
+
+    <!-- FIREBASE MODULE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
-        // --- ESTADO DA APLICAÇÃO ---
         const defaultState = {
             docsLink: "",
             chapters: [
@@ -345,31 +303,23 @@
                 { id: 5, name: '5. Considerações Finais', progress: 0 }
             ],
             tasks: [
-                { id: Date.now()+1, text: 'Definir roteiro de entrevista com artesãos', status: 'doing', author: 'Allan', docLink: '' },
-                { id: Date.now()+2, text: 'Estruturar pasta no Drive', status: 'done', author: 'Haysha', docLink: '' }
+                { id: Date.now()+1, text: 'Definir roteiro de entrevista com artesãos', status: 'doing', author: 'Allan', docLink: '' }
             ],
             references: [
                 { id: Date.now(), author: 'RICHARDS, G.', title: 'Creative Tourism: A Global Conversation', year: '2011', type: 'Artigo', url: '' }
             ],
-            notes: [
-                { id: Date.now(), text: 'Ideia: Inserir oficina de vivência histórica no mirante.', date: new Date().toLocaleString('pt-BR'), author: 'Haysha' }
-            ]
+            notes: []
         };
 
-        // Torna a variável global para que as funções fora do módulo a acessem
         window.appData = { ...defaultState };
         window.currentUserProfile = localStorage.getItem('tccUserProfile') || 'Allan';
-        
-        // Define valor do select
         document.getElementById('user-profile').value = window.currentUserProfile;
 
-        // --- FIREBASE SETUP ---
         let db, auth, docRef;
         let isFirebaseActive = false;
 
         async function initCloud() {
             try {
-                // SUA CONFIGURAÇÃO OFICIAL DO FIREBASE
                 const firebaseConfig = {
                     apiKey: "AIzaSyCYMke6kjZ_Mez-Ny_w0rK9XoJaf9gFUkM",
                     authDomain: "tcc-turismo-criativo.firebaseapp.com",
@@ -383,42 +333,36 @@
                 auth = getAuth(app);
                 db = getFirestore(app);
 
-                // Faz o login anônimo automático para permitir salvar os dados
                 await signInAnonymously(auth);
 
                 onAuthStateChanged(auth, (user) => {
                     if (user) {
                         isFirebaseActive = true;
+                        window.firebaseLoaded = true; // Desativa o Failsafe
                         
-                        // Caminho no seu próprio banco de dados (Coleção: tcc_data, Documento: painel_principal)
                         docRef = doc(db, 'tcc_data', 'painel_principal');
                         
-                        // Ouve as mudanças na nuvem em tempo real
                         onSnapshot(docRef, (docSnap) => {
                             if (docSnap.exists()) {
                                 window.appData = docSnap.data();
                             } else {
-                                // Se o documento ainda não existir, cria a primeira versão na nuvem
                                 saveToCloud(window.appData);
                             }
                             updateAllViews();
                             document.getElementById('sync-status').innerHTML = '<i class="fas fa-cloud-check text-emerald-500"></i> Sincronizado';
-                            document.getElementById('sync-status').classList.remove('text-primary');
-                            document.getElementById('sync-status').classList.add('text-emerald-500');
+                            document.getElementById('sync-status').className = 'flex items-center gap-2 text-xs text-emerald-500 font-bold';
                         }, (error) => {
-                            console.error("Erro no Snapshot do Firebase:", error);
-                            document.getElementById('sync-status').innerHTML = '<i class="fas fa-exclamation-triangle text-red-500"></i> Erro Nuvem';
+                            console.error("Erro no Banco:", error);
+                            document.getElementById('sync-status').innerHTML = '<i class="fas fa-exclamation-triangle text-red-500"></i> Bloqueado (Regras)';
+                            document.getElementById('sync-status').className = 'flex items-center gap-2 text-xs text-red-500 font-bold';
+                            window.firebaseLoaded = true; // Desativa failsafe para mostrar o erro real
+                            updateAllViews();
                         });
                     }
                 });
 
             } catch (err) {
-                console.warn("Rodando no modo Offline (Local Storage)", err);
-                // Fallback para Local Storage caso a internet caia
-                document.getElementById('sync-status').innerHTML = '<i class="fas fa-laptop text-slate-500"></i> Modo Local';
-                const localData = localStorage.getItem('tccCloudData');
-                if(localData) window.appData = JSON.parse(localData);
-                updateAllViews();
+                console.error("Erro crítico:", err);
             }
         }
 
@@ -426,24 +370,23 @@
             if (isFirebaseActive && docRef) {
                 try {
                     await setDoc(docRef, data);
-                } catch (e) { console.error("Erro ao salvar:", e); }
+                } catch (e) { 
+                    console.error("Erro ao salvar:", e); 
+                    window.showToast("Erro ao sincronizar na nuvem. Verifique a internet.", "error");
+                }
             } else {
                 localStorage.setItem('tccCloudData', JSON.stringify(data));
                 updateAllViews();
             }
         };
 
-        // --- SISTEMA DE NOTIFICAÇÃO ---
         window.showToast = function(message, type = 'success') {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            
-            const bgColor = type === 'success' ? 'bg-emerald-500' : 'bg-blue-500';
-            const icon = type === 'success' ? 'fa-check-circle' : 'fa-info-circle';
-
+            const bgColor = type === 'success' ? 'bg-emerald-500' : 'bg-red-500';
+            const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-triangle';
             toast.className = `${bgColor} text-white px-4 py-3 rounded-lg shadow-lg flex items-center gap-3 toast-enter min-w-[250px]`;
             toast.innerHTML = `<i class="fas ${icon}"></i><span class="text-sm font-medium">${message}</span>`;
-            
             container.appendChild(toast);
             setTimeout(() => {
                 toast.classList.replace('toast-enter', 'toast-exit');
@@ -451,322 +394,294 @@
             }, 3000);
         };
 
-        // --- FUNÇÕES GLOBAIS DE UI ---
         window.changeProfile = function() {
             window.currentUserProfile = document.getElementById('user-profile').value;
             localStorage.setItem('tccUserProfile', window.currentUserProfile);
-            window.showToast(`Perfil alterado para: ${window.currentUserProfile}`);
+            window.showToast(`Perfil: ${window.currentUserProfile}`);
         };
 
         window.switchTab = function(tabId) {
-            const titles = {
-                'dashboard': 'Visão Geral',
-                'kanban': 'Quadro de Tarefas',
-                'referencias': 'Repositório Bibliográfico',
-                'anotacoes': 'Caderno de Insights',
-                'orientacao': 'Área de Orientação'
+            const titles = { 
+                'dashboard': 'Visão Geral', 
+                'kanban': 'Quadro de Tarefas', 
+                'referencias': 'Repositório Bibliográfico', 
+                'anotacoes': 'Caderno de Insights', 
+                'orientacao': 'Área de Orientação' 
             };
-
-            document.querySelectorAll('.view-section').forEach(el => { el.classList.add('hidden'); el.classList.remove('block', 'flex'); });
+            
+            document.querySelectorAll('.view-section').forEach(el => { 
+                el.classList.add('hidden'); 
+                el.classList.remove('block', 'flex'); 
+            });
+            
             document.querySelectorAll('.nav-btn').forEach(btn => { 
                 btn.classList.remove('bg-primary', 'text-white', 'bg-slate-800'); 
                 if(btn.id !== 'nav-orientacao') btn.classList.add('text-slate-400');
             });
-
+            
             const activeView = document.getElementById(`view-${tabId}`);
-            if(tabId === 'kanban') activeView.classList.add('flex'); else activeView.classList.add('block');
-            activeView.classList.remove('hidden');
-
-            const activeBtn = document.getElementById(`nav-${tabId}`);
-            if(tabId === 'orientacao') {
-                activeBtn.classList.add('bg-slate-800', 'text-secondary');
-            } else {
-                activeBtn.classList.add('bg-primary', 'text-white');
-                activeBtn.classList.remove('text-slate-400');
+            if(tabId === 'kanban') {
+                activeView.classList.add('flex'); 
+            } else { 
+                activeView.classList.add('block'); 
             }
-
+            activeView.classList.remove('hidden');
+            
+            const activeBtn = document.getElementById(`nav-${tabId}`);
+            if(tabId === 'orientacao') { 
+                activeBtn.classList.add('bg-slate-800', 'text-secondary'); 
+            } else { 
+                activeBtn.classList.add('bg-primary', 'text-white'); 
+                activeBtn.classList.remove('text-slate-400'); 
+            }
+            
             document.getElementById('page-title').innerText = titles[tabId];
         };
 
         window.updateChapterProgress = function(index, value) {
             window.appData.chapters[index].progress = value;
-            document.getElementById(`prog-val-${index}`).innerText = `${value}%`;
             window.saveToCloud();
         };
 
-        // --- ATUALIZAR VIEWS ---
         window.updateAllViews = function() {
-            // Dashboard
+            // Update Dashboard Chapters
             const chaptersContainer = document.getElementById('chapters-container');
             chaptersContainer.innerHTML = '';
             let totalProgress = 0;
-
             window.appData.chapters.forEach((chap, index) => {
                 totalProgress += parseInt(chap.progress);
                 chaptersContainer.innerHTML += `
                     <div>
                         <div class="flex justify-between text-sm mb-1">
                             <span class="font-medium text-slate-700">${chap.name}</span>
-                            <span class="font-bold text-primary" id="prog-val-${index}">${chap.progress}%</span>
+                            <span class="font-bold text-primary">${chap.progress}%</span>
                         </div>
-                        <input type="range" min="0" max="100" value="${chap.progress}" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary" oninput="updateChapterProgress(${index}, this.value)">
-                    </div>
-                `;
+                        <input type="range" min="0" max="100" value="${chap.progress}" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary" onchange="updateChapterProgress(${index}, this.value)">
+                    </div>`;
             });
 
-            const avgProgress = window.appData.chapters.length > 0 ? Math.round(totalProgress / window.appData.chapters.length) : 0;
-            document.getElementById('overall-progress-text').innerText = `${avgProgress}% Concluído`;
-            document.querySelector('.border-t-primary').style.setProperty('--progress', `${avgProgress}%`);
-
-            // Focus Tasks (Dashboard)
+            // Update Focus Tasks on Dashboard
             const focusContainer = document.getElementById('focus-tasks');
             focusContainer.innerHTML = '';
             const focusList = window.appData.tasks.filter(t => t.status === 'doing' || t.status === 'todo').slice(0, 3);
-            if(focusList.length === 0) focusContainer.innerHTML = '<p class="text-sm text-slate-500 italic">Nenhuma tarefa pendente!</p>';
-            
+            if(focusList.length === 0) {
+                focusContainer.innerHTML = '<p class="text-sm text-slate-500 italic">Nenhuma tarefa pendente!</p>';
+            }
             focusList.forEach(task => {
                 const icon = task.status === 'doing' ? '<i class="fas fa-spinner fa-spin text-primary"></i>' : '<i class="far fa-circle text-slate-400"></i>';
                 focusContainer.innerHTML += `
                     <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg border border-slate-100">
                         ${icon}
                         <span class="text-sm text-slate-700 truncate">${task.text}</span>
-                    </div>
-                `;
+                    </div>`;
             });
 
-            // Kanban
+            // Update Kanban Columns
             const cols = { 'todo': [], 'doing': [], 'review': [], 'done': [] };
-            window.appData.tasks.forEach(task => {
-                if(cols[task.status]) cols[task.status].push(task);
+            window.appData.tasks.forEach(task => { 
+                if(cols[task.status]) cols[task.status].push(task); 
             });
-
+            
             Object.keys(cols).forEach(status => {
                 document.getElementById(`count-${status}`).innerText = cols[status].length;
                 const container = document.getElementById(`col-${status}`);
                 container.innerHTML = '';
-
                 cols[status].forEach(task => {
                     let moveBtns = '';
-                    if(status === 'todo') moveBtns = `<button onclick="moveTask(${task.id}, 'doing')" class="text-xs text-primary hover:underline font-medium">Iniciar &rarr;</button>`;
-                    if(status === 'doing') moveBtns = `
-                        <button onclick="moveTask(${task.id}, 'todo')" class="text-xs text-slate-400 hover:text-slate-700">&larr;</button>
-                        <button onclick="moveTask(${task.id}, 'review')" class="text-xs text-amber-600 hover:underline font-medium">P/ Orientadora &rarr;</button>`;
-                    if(status === 'review') moveBtns = `
-                        <button onclick="moveTask(${task.id}, 'doing')" class="text-xs text-slate-400 hover:text-slate-700">&larr; Ajustar</button>
-                        <button onclick="moveTask(${task.id}, 'done')" class="text-xs text-emerald-600 hover:underline font-medium">Aprovar &rarr;</button>`;
-                    if(status === 'done') moveBtns = `<button onclick="deleteTask(${task.id})" class="text-xs text-red-400 hover:text-red-600"><i class="fas fa-trash"></i></button>`;
-
+                    if(status === 'todo') {
+                        moveBtns = `<button onclick="moveTask(${task.id}, 'doing')" class="text-xs text-primary hover:underline font-medium">Iniciar &rarr;</button>`;
+                    } else if(status === 'doing') {
+                        moveBtns = `<button onclick="moveTask(${task.id}, 'todo')" class="text-xs text-slate-400">&larr;</button>
+                                    <button onclick="moveTask(${task.id}, 'review')" class="text-xs text-amber-600 hover:underline font-medium">P/ Orientadora &rarr;</button>`;
+                    } else if(status === 'review') {
+                        moveBtns = `<button onclick="moveTask(${task.id}, 'doing')" class="text-xs text-slate-400">&larr; Ajustar</button>
+                                    <button onclick="moveTask(${task.id}, 'done')" class="text-xs text-emerald-600 hover:underline font-medium">Aprovar &rarr;</button>`;
+                    } else if(status === 'done') {
+                        moveBtns = `<button onclick="deleteTask(${task.id})" class="text-xs text-red-400 hover:text-red-600"><i class="fas fa-trash"></i></button>`;
+                    }
+                    
                     const authorBadge = `<span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full mt-2 inline-block"><i class="fas fa-user mr-1"></i>${task.author}</span>`;
-                    const docBtn = task.docLink ? `<a href="${task.docLink}" target="_blank" class="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full mt-2 inline-block ml-1 hover:bg-blue-200"><i class="fas fa-file-alt mr-1"></i>Doc</a>` : '';
-
+                    
                     container.innerHTML += `
-                        <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-200 cursor-default hover:shadow-md transition">
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-200">
                             <p class="text-sm text-slate-800 leading-snug">${task.text}</p>
-                            <div>${authorBadge} ${docBtn}</div>
+                            <div>${authorBadge}</div>
                             <div class="mt-3 flex justify-between items-center border-t border-slate-100 pt-2">
                                 ${moveBtns}
                             </div>
-                        </div>
-                    `;
+                        </div>`;
                 });
             });
 
-            // References
+            // Update References
             const refContainer = document.getElementById('references-container');
             refContainer.innerHTML = '';
             window.appData.references.forEach(ref => {
-                const abntStr = `${ref.author.toUpperCase()}. ${ref.title}. ${ref.year}.`;
-                let linkHtml = ref.url ? `<a href="${ref.url}" target="_blank" class="text-primary text-xs hover:underline mt-2 inline-block"><i class="fas fa-external-link-alt mr-1"></i>Acessar</a>` : '';
-                
                 refContainer.innerHTML += `
                     <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 relative group">
                         <button onclick="deleteRef(${ref.id})" class="absolute top-3 right-3 text-slate-300 hover:text-red-500 transition opacity-0 group-hover:opacity-100"><i class="fas fa-trash"></i></button>
-                        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1"><i class="fas fa-bookmark"></i> ${ref.type}</div>
-                        <h3 class="font-bold text-slate-800 text-sm leading-tight mb-1">${ref.title}</h3>
+                        <h3 class="font-bold text-slate-800 text-sm mb-1">${ref.title}</h3>
                         <p class="text-sm text-slate-600 mb-2">${ref.author} (${ref.year})</p>
-                        ${linkHtml}
-                    </div>
-                `;
+                    </div>`;
             });
 
-            // Notes
+            // Update Notes
             const notesContainer = document.getElementById('notes-container');
             notesContainer.innerHTML = '';
             [...window.appData.notes].reverse().forEach(note => {
-                const colorClass = note.author === 'Orientadora' ? 'bg-amber-50 border-amber-200' : 'bg-white border-slate-200';
                 notesContainer.innerHTML += `
-                    <div class="${colorClass} p-4 rounded-xl border shadow-sm relative group">
-                         <button onclick="deleteNote(${note.id})" class="absolute top-3 right-3 text-slate-400 hover:text-red-500 transition opacity-0 group-hover:opacity-100"><i class="fas fa-times"></i></button>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm relative group">
+                        <button onclick="deleteNote(${note.id})" class="absolute top-3 right-3 text-slate-400 hover:text-red-500 transition opacity-0 group-hover:opacity-100"><i class="fas fa-times"></i></button>
                         <p class="text-sm text-slate-800 whitespace-pre-wrap">${note.text}</p>
-                        <div class="mt-3 flex justify-between items-center text-xs text-slate-500">
+                        <div class="mt-3 text-xs text-slate-500">
                             <span><i class="fas fa-user-edit mr-1"></i>${note.author}</span>
-                            <span>${note.date}</span>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             });
 
-            // Orientadora View
-            const docsInput = document.getElementById('docs-link-input');
-            const openDocsBtn = document.getElementById('open-docs-btn');
-            
-            // Só atualiza o input se ele não estiver focado (pra não apagar enquanto digita)
-            if (document.activeElement !== docsInput) {
-                docsInput.value = window.appData.docsLink || "";
+            // Update Advisor View
+            if(document.activeElement !== document.getElementById('docs-link-input')) {
+                document.getElementById('docs-link-input').value = window.appData.docsLink || "";
             }
-
-            if(window.appData.docsLink && window.appData.docsLink.trim() !== "") {
-                openDocsBtn.href = window.appData.docsLink;
-                openDocsBtn.classList.remove('opacity-50', 'pointer-events-none');
-                openDocsBtn.classList.add('shadow-md');
-                openDocsBtn.innerHTML = 'Acessar Documento Oficial <i class="fas fa-external-link-alt ml-2 text-sm"></i>';
+            
+            const openDocsBtn = document.getElementById('open-docs-btn');
+            if(window.appData.docsLink && window.appData.docsLink.trim() !== "") { 
+                openDocsBtn.href = window.appData.docsLink; 
+                openDocsBtn.classList.remove('opacity-50', 'pointer-events-none'); 
+                openDocsBtn.innerHTML = 'Abrir Documento <i class="fas fa-external-link-alt ml-2"></i>'; 
             } else {
                 openDocsBtn.href = "#";
                 openDocsBtn.classList.add('opacity-50', 'pointer-events-none');
                 openDocsBtn.innerHTML = 'Link não configurado';
             }
 
-            // Histórico Orientadora
             const historyContainer = document.getElementById('advisor-history');
             historyContainer.innerHTML = '';
-            const advisorTasks = window.appData.tasks.filter(t => t.author === 'Orientadora');
-            
-            if(advisorTasks.length === 0) {
-                historyContainer.innerHTML = '<p class="text-sm text-slate-500 italic">Nenhum feedback enviado ainda.</p>';
-            }
-
-            advisorTasks.forEach(task => {
-                const statusColor = task.status === 'done' ? 'text-emerald-500' : 'text-amber-500';
-                const statusIcon = task.status === 'done' ? 'fa-check-circle' : 'fa-clock';
+            window.appData.tasks.filter(t => t.author === 'Sônia').forEach(task => {
                 historyContainer.innerHTML += `
-                    <div class="bg-white p-3 rounded-lg border border-slate-200 flex items-center justify-between gap-3 shadow-sm">
-                        <div class="flex items-center gap-3">
-                            <i class="fas ${statusIcon} ${statusColor}"></i>
-                            <span class="text-sm text-slate-700 ${task.status === 'done' ? 'line-through opacity-70' : ''}">${task.text}</span>
-                        </div>
-                        <span class="text-[10px] bg-slate-100 px-2 py-1 rounded text-slate-500 uppercase">${task.status}</span>
-                    </div>
-                `;
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 flex justify-between gap-3 shadow-sm">
+                        <span class="text-sm text-slate-700">${task.text}</span>
+                    </div>`;
             });
         };
 
-        // --- AÇÕES DO USUÁRIO ---
-        window.moveTask = function(id, newStatus) {
-            const task = window.appData.tasks.find(t => t.id === id);
-            if(task) { task.status = newStatus; window.saveToCloud(); }
+        // Crud functions expanded
+        window.moveTask = function(id, newStatus) { 
+            const task = window.appData.tasks.find(t => t.id === id); 
+            if(task) { 
+                task.status = newStatus; 
+                window.saveToCloud(); 
+            } 
         };
 
-        window.deleteTask = function(id) {
-            window.appData.tasks = window.appData.tasks.filter(t => t.id !== id);
-            window.saveToCloud();
-            window.showToast('Tarefa excluída');
+        window.deleteTask = function(id) { 
+            window.appData.tasks = window.appData.tasks.filter(t => t.id !== id); 
+            window.saveToCloud(); 
         };
 
         window.saveTask = function() {
             const title = document.getElementById('task-title').value;
-            const link = document.getElementById('task-link').value;
-            const status = document.getElementById('task-status').value;
             if(!title) return;
             
             window.appData.tasks.push({ 
                 id: Date.now(), 
                 text: title, 
-                status: status,
-                docLink: link,
-                author: window.currentUserProfile
+                status: document.getElementById('task-status').value, 
+                docLink: document.getElementById('task-link').value, 
+                author: window.currentUserProfile 
             });
             
             document.getElementById('task-title').value = '';
             document.getElementById('task-link').value = '';
-            window.closeModal('task-modal');
-            window.saveToCloud();
-            window.showToast('Tarefa enviada para a nuvem!');
+            
+            window.closeModal('task-modal'); 
+            window.saveToCloud(); 
+            window.showToast('Tarefa salva!');
         };
 
         window.saveReference = function() {
-            const author = document.getElementById('ref-author').value;
-            const title = document.getElementById('ref-title').value;
-            if(!author || !title) return;
-
             window.appData.references.push({ 
                 id: Date.now(), 
-                author, 
-                title, 
+                author: document.getElementById('ref-author').value, 
+                title: document.getElementById('ref-title').value, 
                 year: document.getElementById('ref-year').value, 
                 type: document.getElementById('ref-type').value, 
                 url: document.getElementById('ref-url').value 
             });
             
             document.querySelectorAll('#ref-modal input').forEach(i => i.value = '');
-            window.closeModal('ref-modal');
-            window.saveToCloud();
+            
+            window.closeModal('ref-modal'); 
+            window.saveToCloud(); 
             window.showToast('Referência salva!');
         };
 
-        window.deleteRef = function(id) {
-            window.appData.references = window.appData.references.filter(r => r.id !== id);
-            window.saveToCloud();
+        window.deleteRef = function(id) { 
+            window.appData.references = window.appData.references.filter(r => r.id !== id); 
+            window.saveToCloud(); 
         };
 
-        window.addNote = function() {
+        window.addNote = function() { 
             const text = document.getElementById('new-note-text').value;
             if(!text) return;
-            window.appData.notes.push({
-                id: Date.now(), text: text, date: new Date().toLocaleString('pt-BR'), author: window.currentUserProfile
-            });
-            document.getElementById('new-note-text').value = '';
-            window.saveToCloud();
-            window.showToast('Insight salvo!');
+            
+            window.appData.notes.push({ 
+                id: Date.now(), 
+                text: text, 
+                date: new Date().toLocaleString('pt-BR'), 
+                author: window.currentUserProfile 
+            }); 
+            
+            document.getElementById('new-note-text').value = ''; 
+            window.saveToCloud(); 
+            window.showToast('Insight salvo!'); 
         };
 
-        window.deleteNote = function(id) {
-            window.appData.notes = window.appData.notes.filter(n => n.id !== id);
-            window.saveToCloud();
+        window.deleteNote = function(id) { 
+            window.appData.notes = window.appData.notes.filter(n => n.id !== id); 
+            window.saveToCloud(); 
         };
 
-        // Ações da Orientadora
-        window.saveDocsLink = function() {
-            const link = document.getElementById('docs-link-input').value;
-            window.appData.docsLink = link;
-            window.saveToCloud();
-            window.showToast('Link do documento atualizado!');
+        window.saveDocsLink = function() { 
+            window.appData.docsLink = document.getElementById('docs-link-input').value; 
+            window.saveToCloud(); 
+            window.showToast('Link atualizado!'); 
         };
 
-        window.addAdvisorTask = function() {
+        window.addAdvisorTask = function() { 
             const text = document.getElementById('advisor-task-input').value;
             if(!text) return;
-
-            window.appData.tasks.push({
-                id: Date.now(),
-                text: "Diretriz: " + text,
-                status: 'todo',
-                docLink: window.appData.docsLink, // Anexa automaticamente o link do docs se houver
-                author: 'Orientadora'
-            });
             
-            document.getElementById('advisor-task-input').value = '';
-            window.saveToCloud();
-            window.showToast('Feedback enviado para o Kanban das alunas!', 'success');
+            window.appData.tasks.push({ 
+                id: Date.now(), 
+                text: "Diretriz: " + text, 
+                status: 'todo', 
+                docLink: window.appData.docsLink, 
+                author: 'Sônia' 
+            }); 
+            
+            document.getElementById('advisor-task-input').value = ''; 
+            window.saveToCloud(); 
+            window.showToast('Enviado!'); 
         };
 
-        // Modais
-        window.openModal = function(id) {
-            const modal = document.getElementById(id);
-            const content = document.getElementById(id + '-content');
-            modal.classList.remove('hidden');
-            setTimeout(() => { content.classList.remove('scale-95'); content.classList.add('scale-100'); }, 10);
+        window.openModal = function(id) { 
+            document.getElementById(id).classList.remove('hidden'); 
         };
 
-        window.closeModal = function(id) {
-            const modal = document.getElementById(id);
-            const content = document.getElementById(id + '-content');
-            content.classList.remove('scale-100'); content.classList.add('scale-95');
-            setTimeout(() => modal.classList.add('hidden'), 200);
+        window.closeModal = function(id) { 
+            document.getElementById(id).classList.add('hidden'); 
         };
 
-        // Inicia a aplicação conectando no Firebase
+        // Inicialização
         initCloud();
-
+        
+        // Em caso de falha silenciosa, a UI será destravada forçadamente após carregar as funções básicas.
+        setTimeout(() => { 
+            if (!window.firebaseLoaded && typeof window.updateAllViews === 'function') {
+                window.updateAllViews(); 
+            }
+        }, 4100);
     </script>
 </body>
 </html>
